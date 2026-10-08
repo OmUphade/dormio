@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dormio — UML Sequence Diagram for UPI Direct Payment</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #FFFFFF;
+      color: #0F172A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 30px;
+      min-width: 2200px;
+    }
+    .diagram-header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #E2E8F0;
+    }
+    .diagram-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+    }
+    .diagram-header p {
+      font-size: 16px;
+      color: #475569;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .badges-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .badge {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-uml { background: #E0F2FE; color: #0369A1; }
+    .badge-upi { background: #FEF3C7; color: #B45309; }
+    .badge-safe { background: #DCFCE7; color: #166534; }
+
+    #mermaid-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+    }
+    .actor {
+      font-family: 'Outfit', sans-serif !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      stroke: #0F172A !important;
+      stroke-width: 2px !important;
+    }
+    .messageText {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      font-size: 14.5px !important;
+      font-weight: 600 !important;
+      fill: #0F172A !important;
+    }
+    .messageLine0, .messageLine1 {
+      stroke: #0F172A !important;
+      stroke-width: 2px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="diagram-header">
+    <h1>DORMIO — UML Sequence Diagram: UPI Direct Payment</h1>
+    <p>Zero-Aggregator Flow: Direct Peer-to-Merchant Transfer, UTR Proof Submission & Staff Statement Verification</p>
+    <div class="badges-row">
+      <span class="badge badge-uml">Standard UML Sequence Lifelines</span>
+      <span class="badge badge-upi">Direct NPCI Settlement (Dormio holds ₹0)</span>
+      <span class="badge badge-safe">Anti-Fraud unique(property_id, utr)</span>
+    </div>
+  </div>
+
+  <div id="mermaid-container" class="mermaid">
+sequenceDiagram
+    autonumber
+    actor Resident as 👤 Resident<br/>(Tenant)
+    participant Web as 💻 Dormio Web / PWA<br/>(Next.js Client)
+    participant API as ⚙️ Dormio API & DB<br/>(Express 5 / PostgreSQL)
+    participant UPIApp as 📱 Resident UPI App<br/>(GPay / PhonePe / Paytm)
+    participant NPCI as 🏦 NPCI / Owner Bank<br/>(Direct Account Settlement)
+    actor Staff as 👔 Operator / Staff<br/>(Owner Console)
+
+    Note over Resident,Staff: Phase 1: Invoice Payment Request & Dynamic UPI Generation
+    Resident->>Web: Navigate to Rent Ledger & Click "Pay Rent" (₹8,500)
+    activate Web
+    Web->>API: GET /api/v1/invoices/:id/upi-intent
+    activate API
+    API-->>Web: Return upi://pay link & dynamic QR payload<br/>(Target VPA, Amount, Invoice Ref)
+    deactivate API
+    Web-->>Resident: Render Dynamic QR Code & "Pay via UPI App" Button
+    deactivate Web
+
+    Note over Resident,NPCI: Phase 2: Direct NPCI Transfer to Owner (Dormio holds ₹0)
+    Resident->>UPIApp: Tap "Pay via UPI" / Scan QR with phone
+    activate UPIApp
+    Resident->>UPIApp: Authenticate with secret UPI PIN
+    UPIApp->>NPCI: Route transfer directly to Owner Bank Account
+    activate NPCI
+    NPCI-->>NPCI: Credit funds directly to Property Owner's Account
+    NPCI-->>UPIApp: Transaction Success + Issue 12-Digit UTR (e.g. 234567890123)
+    deactivate NPCI
+    UPIApp-->>Resident: Display Payment Success with 12-Digit UTR
+    deactivate UPIApp
+
+    Note over Resident,API: Phase 3: UTR Submission & Fraud Prevention
+    Resident->>Web: Enter 12-digit UTR in Rent Ledger Form
+    activate Web
+    Web->>API: POST /api/v1/payments/verify-claim { invoice_id, utr: "234567890123" }
+    activate API
+    API->>API: Validate unique(property_id, utr) & create Payment (status: PENDING)
+    API-->>Staff: Real-time Alert: "New UTR pending verification for Room 304"
+    API-->>Web: Acknowledge submission (status: PENDING_VERIFICATION)
+    deactivate API
+    Web-->>Resident: Show Amber Status: "Submitted · Awaiting Staff Match"
+    deactivate Web
+
+    Note over Staff,Resident: Phase 4: Staff Verification & PDF Receipt Issuance
+    Staff->>Staff: Check Owner Bank Statement / Bank SMS for matching UTR & ₹8,500
+    Staff->>API: PATCH /api/v1/payments/:id/verify { action: "APPROVE" }
+    activate API
+    API->>API: Update Payment status to PAID, Invoice status to PAID
+    API->>API: Generate immutable PDF Receipt record
+    API-->>Staff: Confirmation: "Payment Verified & Receipt Generated"
+    API-->>Web: Push Notification: "Rent Verified Paid!"
+    deactivate API
+    Web-->>Resident: Show Green Status: "Verified Paid" + Instant PDF Receipt Download
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        fontSize: '15px',
+        actorFontSize: '16px',
+        noteFontSize: '14px',
+        fontFamily: 'Plus Jakarta Sans',
+        primaryColor: '#F8FAFC',
+        primaryTextColor: '#0F172A',
+        primaryBorderColor: '#0F172A',
+        lineColor: '#0F172A',
+        secondaryColor: '#FFF7ED',
+        tertiaryColor: '#FFFFFF',
+        activationBorderColor: '#EA580C',
+        activationBkgColor: '#FFEDD5',
+        noteBkgColor: '#FEF3C7',
+        noteTextColor: '#92400E',
+        noteBorderColor: '#FDE68A'
+      },
+      sequence: {
+        useMaxWidth: false,
+        showSequenceNumbers: true,
+        actorMargin: 70,
+        boxMargin: 15,
+        boxTextMargin: 8,
+        noteMargin: 15,
+        messageMargin: 35
+      }
+    });
+  </script>
+</body>
+</html>

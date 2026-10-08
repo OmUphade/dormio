@@ -1,0 +1,31 @@
+:root {
+  --color-primary: #ea580c;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f97316;
+  --color-secondary-foreground: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-foreground: #ffffff;
+  --color-canvas: #fff7ed;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-muted: #fdf4f0;
+  --color-muted-foreground: #475569;
+  --color-border: #fceae1;
+  --color-ring: #ea580c;
+
+  /* Module specific colors */
+  --color-hostel: #ea580c;
+  --color-mess: #059669;
+  --color-payment: #0d9488;
+  --color-security: #0369a1;
+  --color-notice: #d97706;
+  --color-ai: #2563eb;
+
+  /* Shape tokens */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-arch: 32px 32px 12px 12px;
+  --radius-pill: 9999px;
+}

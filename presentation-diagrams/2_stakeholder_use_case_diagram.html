@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dormio — Stakeholder Use Case Diagram</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #FFFFFF;
+      color: #0F172A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 30px;
+      min-width: 2200px;
+    }
+    .diagram-header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #E2E8F0;
+    }
+    .diagram-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+    }
+    .diagram-header p {
+      font-size: 16px;
+      color: #475569;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .badges-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .badge {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-uml { background: #E0E7FF; color: #3730A3; }
+    .badge-boundary { background: #FEF3C7; color: #B45309; }
+    .badge-roles { background: #DCFCE7; color: #166534; }
+
+    #mermaid-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+    }
+    /* SVG Styling for crisp presentation printing */
+    .node rect, .node circle, .node ellipse {
+      stroke-width: 2px !important;
+    }
+    .node ellipse {
+      fill: #FFFFFF !important;
+      stroke: #2563EB !important;
+      stroke-width: 2.2px !important;
+    }
+    .cluster rect {
+      fill: #F8FAFC !important;
+      stroke: #0F172A !important;
+      stroke-width: 2.5px !important;
+      rx: 16px !important;
+    }
+    .cluster-label {
+      font-family: 'Outfit', sans-serif !important;
+      font-size: 20px !important;
+      font-weight: 800 !important;
+      fill: #0F172A !important;
+    }
+    .edgePath path {
+      stroke: #475569 !important;
+      stroke-width: 2px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="diagram-header">
+    <h1>DORMIO — UML Stakeholder Use Case Diagram</h1>
+    <p>Complete Use Case Mapping Across Public Marketplace, Resident Living Hub, and Operator Console</p>
+    <div class="badges-row">
+      <span class="badge badge-uml">Standard UML 2.5 Notation</span>
+      <span class="badge badge-boundary">Platform System Boundary</span>
+      <span class="badge badge-roles">6 Primary Stakeholder Personas</span>
+    </div>
+  </div>
+
+  <div id="mermaid-container" class="mermaid">
+flowchart LR
+    %% Primary Actors on Left
+    subgraph ACTORS_LEFT [" "]
+        direction TB
+        SEEKER["👤 &lt;b&gt;SEEKER&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Student / Parent&lt;/i&gt;"]
+        RESIDENT["👤 &lt;b&gt;RESIDENT&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Active Tenant&lt;/i&gt;"]
+        SUBSCRIBER["👤 &lt;b&gt;SUBSCRIBER&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Mess Consumer&lt;/i&gt;"]
+    end
+
+    %% Dormio System Boundary Box
+    subgraph DORMIO ["🏢 SYSTEM BOUNDARY: DORMIO PLATFORM"]
+        direction TB
+        
+        subgraph MODULE_MARKETPLACE ["🌐 Discovery & Marketplace"]
+            UC_SEARCH(["🔎 Search Stays & Messes by College Area"])
+            UC_FILTER(["⚙️ Filter by Rent, Sharing, Gender & Curfew"])
+            UC_MAP(["🗺️ View MapLibre Interactive Pins"])
+            UC_REVIEWS(["⭐ Read Verified Resident Reviews"])
+            UC_ENQUIRE(["📅 Schedule Visit / Enquire Bed"])
+        end
+
+        subgraph MODULE_STAY ["📱 Resident Stay & Living Hub"]
+            UC_GATE_QR(["🎫 Display Rotating Gate Pass QR"])
+            UC_PAY_RENT(["💳 Pay Direct UPI & Submit 12-Digit UTR"])
+            UC_COMPLAINT(["🛠️ Raise Maintenance Complaint"])
+            UC_OUTPASS(["🚶 Submit Overnight Outpass Request"])
+            UC_SKIP_MEAL(["🍲 View Daily Menu & Skip Meal"])
+        end
+
+        subgraph MODULE_OPERATOR ["📊 Operator & Institution Console"]
+            UC_WIZARD(["📝 Multi-Step Listing Onboarding Wizard"])
+            UC_VERIFY_PAY(["✅ Verify Resident UTR (Bank Match)"])
+            UC_ALLOTMENT(["🛏️ Manage Rooms, Floors & Bed Allotments"])
+            UC_NOTICE(["📢 Broadcast Digital Notices to Stays"])
+            UC_RESOLVE_COMP(["🔧 Assign & Close Maintenance Tickets"])
+            UC_MENU_MANAGE(["📋 Update 7-Day Meal Schedule"])
+        end
+
+        subgraph MODULE_SECURITY ["🛡️ Security & Administration"]
+            UC_SCAN_GATE(["⚡ Scan Gate Pass in &lt; 2s (Allowed/Late/Blocked)"])
+            UC_LOG_VISITOR(["📋 Log Manual Guest / Visitor Entry"])
+            UC_KYC_VERIFY(["🛡️ Verify Owner Business KYC & Listings"])
+            UC_MODERATE(["⚖️ Moderate Content & Prevent PII Leakage"])
+        end
+    end
+
+    %% Stakeholders on Right
+    subgraph ACTORS_RIGHT [" "]
+        direction TB
+        OWNER["👤 &lt;b&gt;PROPERTY OWNER&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Hostel / PG / Mess&lt;/i&gt;"]
+        INSTITUTION["🏫 &lt;b&gt;INSTITUTION WARDEN&lt;/b&gt;&lt;br/&gt;&lt;i&gt;College Campus&lt;/i&gt;"]
+        GUARD["👮 &lt;b&gt;GATE GUARD&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Security Staff&lt;/i&gt;"]
+        ADMIN["🛡️ &lt;b&gt;PLATFORM ADMIN&lt;/b&gt;&lt;br/&gt;&lt;i&gt;Dormio Team&lt;/i&gt;"]
+    end
+
+    %% Actor Connections (Associations)
+    SEEKER --- UC_SEARCH
+    SEEKER --- UC_FILTER
+    SEEKER --- UC_MAP
+    SEEKER --- UC_REVIEWS
+    SEEKER --- UC_ENQUIRE
+
+    RESIDENT --- UC_GATE_QR
+    RESIDENT --- UC_PAY_RENT
+    RESIDENT --- UC_COMPLAINT
+    RESIDENT --- UC_OUTPASS
+    RESIDENT --- UC_REVIEWS
+
+    SUBSCRIBER --- UC_SKIP_MEAL
+    SUBSCRIBER --- UC_PAY_RENT
+
+    OWNER --- UC_WIZARD
+    OWNER --- UC_VERIFY_PAY
+    OWNER --- UC_ALLOTMENT
+    OWNER --- UC_NOTICE
+    OWNER --- UC_RESOLVE_COMP
+    OWNER --- UC_MENU_MANAGE
+
+    INSTITUTION --- UC_ALLOTMENT
+    INSTITUTION --- UC_NOTICE
+    INSTITUTION --- UC_VERIFY_PAY
+
+    GUARD --- UC_SCAN_GATE
+    GUARD --- UC_LOG_VISITOR
+
+    ADMIN --- UC_KYC_VERIFY
+    ADMIN --- UC_MODERATE
+
+    %% Style nodes
+    style SEEKER fill:#FFF7ED,stroke:#EA580C,stroke-width:2px,color:#0F172A
+    style RESIDENT fill:#EFF6FF,stroke:#2563EB,stroke-width:2px,color:#0F172A
+    style SUBSCRIBER fill:#ECFDF5,stroke:#059669,stroke-width:2px,color:#0F172A
+    style OWNER fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#0F172A
+    style INSTITUTION fill:#F0FDF4,stroke:#16A34A,stroke-width:2px,color:#0F172A
+    style GUARD fill:#EEF2FF,stroke:#4338CA,stroke-width:2px,color:#0F172A
+    style ADMIN fill:#F1F5F9,stroke:#475569,stroke-width:2px,color:#0F172A
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        fontSize: '15px',
+        fontFamily: 'Plus Jakarta Sans',
+        primaryColor: '#FFFFFF',
+        primaryTextColor: '#0F172A',
+        primaryBorderColor: '#2563EB',
+        lineColor: '#64748B'
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: 'basis'
+      }
+    });
+  </script>
+</body>
+</html>

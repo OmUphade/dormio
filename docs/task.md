@@ -8,34 +8,34 @@
 
 ## Progress Summary
 
-| Metric | Count |
-|---|---|
-| **Total tasks** | **149** |
-| ✅ Completed | 7 |
-| 🔄 In progress | 0 |
-| ⬜ Not started | 142 |
-| ⏸ Blocked | 0 |
-| **Overall progress** | **5%** |
+| Metric               | Count   |
+| -------------------- | ------- |
+| **Total tasks**      | **149** |
+| ✅ Completed         | 23      |
+| 🔄 In progress       | 0       |
+| ⬜ Not started       | 126     |
+| ⏸ Blocked            | 0       |
+| **Overall progress** | **15%** |
 
-| Phase | Name | Tasks | Done | In progress | Release |
-|---|---|---|---|---|---|
-| 0 | Planning & Documentation | 7 | 7 | 0 | — |
-| 1 | Project Setup & Agent Tooling | 10 | 0 | 0 | 🅰 |
-| 2 | UI Foundation via UI UX Pro Max | 9 | 0 | 0 | 🅰 |
-| 3 | Auth, Accounts & Access Control | 9 | 0 | 0 | 🅰 |
-| 4 | Owner Onboarding & Listing Management | 11 | 0 | 0 | 🅰 |
-| 5 | Marketplace Discovery (Hostels & PGs) | 12 | 0 | 0 | 🅰 |
-| 6 | Mess Marketplace & Mess Management | 12 | 0 | 0 | 🅱 |
-| 7 | Booking & Stay Lifecycle | 9 | 0 | 0 | 🅱 |
-| 8 | Rent & Payments (UPI-direct) | 9 | 0 | 0 | 🅱 |
-| 9 | Communication & Complaints | 10 | 0 | 0 | 🅱 |
-| 10 | Security, Entry/Exit & CCTV (optional module) | 11 | 0 | 0 | 🅱/🏁 |
-| 11 | Reviews, Ratings & Trust | 7 | 0 | 0 | 🅱 |
-| 12 | Dashboards, Analytics & Reports | 6 | 0 | 0 | 🏁 |
-| 13 | AI Layer | 12 | 0 | 0 | 🅱/🏁 |
-| 14 | PWA, Push & Performance | 4 | 0 | 0 | 🏁 |
-| 15 | Testing, Hardening & Launch | 11 | 0 | 0 | 🏁 |
-| | **Total** | **149** | **7** | **0** | |
+| Phase | Name                                          | Tasks   | Done  | In progress | Release |
+| ----- | --------------------------------------------- | ------- | ----- | ----------- | ------- |
+| 0     | Planning & Documentation                      | 7       | 7     | 0           | —       |
+| 1     | Project Setup & Agent Tooling                 | 10      | 10    | 0           | 🅰       |
+| 2     | UI Foundation via UI UX Pro Max               | 9       | 2     | 0           | 🅰       |
+| 3     | Auth, Accounts & Access Control               | 9       | 0     | 0           | 🅰       |
+| 4     | Owner Onboarding & Listing Management         | 11      | 0     | 0           | 🅰       |
+| 5     | Marketplace Discovery (Hostels & PGs)         | 12      | 4     | 0           | 🅰       |
+| 6     | Mess Marketplace & Mess Management            | 12      | 0     | 0           | 🅱       |
+| 7     | Booking & Stay Lifecycle                      | 9       | 0     | 0           | 🅱       |
+| 8     | Rent & Payments (UPI-direct)                  | 9       | 0     | 0           | 🅱       |
+| 9     | Communication & Complaints                    | 10      | 0     | 0           | 🅱       |
+| 10    | Security, Entry/Exit & CCTV (optional module) | 11      | 0     | 0           | 🅱/🏁    |
+| 11    | Reviews, Ratings & Trust                      | 7       | 0     | 0           | 🅱       |
+| 12    | Dashboards, Analytics & Reports               | 6       | 0     | 0           | 🏁      |
+| 13    | AI Layer                                      | 12      | 0     | 0           | 🅱/🏁    |
+| 14    | PWA, Push & Performance                       | 4       | 0     | 0           | 🏁      |
+| 15    | Testing, Hardening & Launch                   | 11      | 0     | 0           | 🏁      |
+|       | **Total**                                     | **149** | **9** | **0**       |         |
 
 **Suggested build order:** 0 → 1 → 2 → 3 → 4 → 5 (Alpha: marketplace live) → 8 → 7 → 9 → 6 → 11 → 10 → 12 → 13 → 14 → 15.
 Reason: owners and seekers must meet first (listings + search), then money and stays, then daily-living features, then AI.
@@ -54,25 +54,23 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ✅ 0.6 Write `memory.md`
 - ✅ 0.7 Resolve open questions, rename to Dormio, re-scope as marketplace + operator platform, add agent/tooling files
 
+## Phase 1: Project Setup & Agent Tooling (10/10)
 
-## Phase 1: Project Setup & Agent Tooling (0/10)
+- ✅ 1.1 Initialize Git repo, license, README, `.gitignore`, branch protection
+- ✅ 1.2 Create pnpm + Turborepo monorepo (`apps/`, `packages/`, `docs/`)
+- ✅ 1.3 Scaffold `apps/web` (React via Next.js App Router in JavaScript/JSX + Tailwind + shadcn/ui) with route groups from architecture §3 and `/api` rewrite to Express
+- ✅ 1.4 Scaffold `apps/api` (Node.js + Express 5, JavaScript ES modules: app.js/server.js, middleware chain skeleton, central error handler, pino logging, `/health`, OpenAPI from Zod at `/api/docs`)
+- ✅ 1.5 Create `packages/shared` and `packages/config` (jsconfig, eslint, tailwind preset)
+- ✅ 1.6 Configure ESLint, Prettier/Biome, Husky, lint-staged, commitlint
+- ✅ 1.7 `docker-compose.yml` up: Postgres (PostGIS + pgvector), Valkey, MinIO, Mailpit; verify extensions load
+- ✅ 1.8 Drizzle ORM + drizzle-kit setup + base schema (User, Organization, Property, Listing) + first migration + seed skeleton; verify PostGIS `geometry` and pgvector `vector` columns work
+- ✅ 1.9 Env validation (Zod) + `.env.example` finalized
+- ✅ 1.10 CI (GitHub Actions: build, lint, test, `check-ui-rules.sh`, `check-ui-provenance.sh`, `check-no-typescript.sh`) + `.coderabbit.yaml` + verify agent tooling (GSD, UI UX Pro Max, Graphify installed and working)
 
-- ⬜ 1.1 Initialize Git repo, license, README, `.gitignore`, branch protection
-- ⬜ 1.2 Create pnpm + Turborepo monorepo (`apps/`, `packages/`, `docs/`)
-- ⬜ 1.3 Scaffold `apps/web` (React via Next.js App Router in JavaScript/JSX + Tailwind + shadcn/ui) with route groups from architecture §3 and `/api` rewrite to Express
-- ⬜ 1.4 Scaffold `apps/api` (Node.js + Express 5, JavaScript ES modules: app.js/server.js, middleware chain skeleton, central error handler, pino logging, `/health`, OpenAPI from Zod at `/api/docs`)
-- ⬜ 1.5 Create `packages/shared` and `packages/config` (jsconfig, eslint, tailwind preset)
-- ⬜ 1.6 Configure ESLint, Prettier/Biome, Husky, lint-staged, commitlint
-- ⬜ 1.7 `docker-compose.yml` up: Postgres (PostGIS + pgvector), Valkey, MinIO, Mailpit; verify extensions load
-- ⬜ 1.8 Drizzle ORM + drizzle-kit setup + base schema (User, Organization, Property, Listing) + first migration + seed skeleton; verify PostGIS `geometry` and pgvector `vector` columns work
-- ⬜ 1.9 Env validation (Zod) + `.env.example` finalized
-- ⬜ 1.10 CI (GitHub Actions: build, lint, test, `check-ui-rules.sh`, `check-ui-provenance.sh`, `check-no-typescript.sh`) + `.coderabbit.yaml` + verify agent tooling (GSD, UI UX Pro Max, Graphify installed and working)
+## Phase 2: UI Foundation via UI UX Pro Max (2/9)
 
-
-## Phase 2: UI Foundation via UI UX Pro Max (0/9)
-
-- ⬜ 2.1 Generate `design-system/dormio/MASTER.md` with UI UX Pro Max (see `Design.md` §2.1); verify against bans; record selection rationale
-- ⬜ 2.2 Generate page overrides + page specs for: home, search, listing detail, mess detail, owner wizard, My Stay hub, rent ledger, guard screen, owner dashboard
+- ✅ 2.1 Generate `design-system/dormio/MASTER.md` with UI UX Pro Max (see `Design.md` §2.1); verify against bans; record selection rationale
+- ✅ 2.2 Generate page overrides + page specs for: home, search, listing detail, mess detail, owner wizard, My Stay hub, rent ledger, guard screen, owner dashboard
 - ⬜ 2.3 Implement tokens (Tailwind theme + CSS variables) from MASTER.md
 - ⬜ 2.4 Fonts via `next/font` per MASTER.md
 - ⬜ 2.5 Install shadcn/ui as unstyled structure and fully restyle to MASTER.md
@@ -80,7 +78,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 2.7 Shared components: ListingCard (both variants), FilterBar, Gallery, RatingBreakdown, TrustBadges, MapView, DataTable, KpiStrip, Chips, Empty/Error/Skeleton, FileUpload
 - ⬜ 2.8 Component showcase `/dev/components` + Playwright screenshot baselines (360/768/1280)
 - ⬜ 2.9 UI gate automation: `check-ui-rules.sh` + `check-ui-provenance.sh` in CI + axe-core + `PAGES.md` / `COMPONENTS.md` registries (every page/component traceable to UI UX Pro Max output)
-
 
 ## Phase 3: Auth, Accounts & Access Control (0/9)
 
@@ -93,7 +90,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 3.7 Invites: staff, resident, guardian (token links)
 - ⬜ 3.8 Audit log service + viewer for admins
 - ⬜ 3.9 Rate limiting, Helmet, CSRF, security headers
-
 
 ## Phase 4: Owner Onboarding & Listing Management (0/11)
 
@@ -109,22 +105,20 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 4.10 Institution workspace: hidden listing, bulk resident import (CSV), allotment list, own branding
 - ⬜ 4.11 Availability freshness: weekly confirm nudge, stale labeling, "last updated"
 
-
-## Phase 5: Marketplace Discovery (Hostels & PGs) (0/12)
+## Phase 5: Marketplace Discovery (Hostels & PGs) (4/12)
 
 - ⬜ 5.1 `listing_public` view/DTO + search API (PostGIS radius, filters, sort, pagination) 🅰
 - ⬜ 5.2 Area autocomplete (locality/college/landmark, "near me") 🅰
-- ⬜ 5.3 Home page (via UI Gate) 🅰
-- ⬜ 5.4 Search results page with filters and cards 🅰
-- ⬜ 5.5 Map view with clustered price pins, "search this area", list/map sync
-- ⬜ 5.6 Listing detail page: gallery, rooms/rent, availability, amenities, rules, safety, location, reviews slot 🅰
+- ✅ 5.3 Home page (via UI Gate) 🅰
+- ✅ 5.4 Search results page with filters and cards 🅰
+- ✅ 5.5 Map view with clustered price pins, "search this area", list/map sync
+- ✅ 5.6 Listing detail page: gallery, rooms/rent, availability, amenities, rules, safety, location, reviews slot 🅰
 - ⬜ 5.7 Compare (up to 3) and compare table
 - ⬜ 5.8 Shortlist / saved listings and saved searches
 - ⬜ 5.9 SEO: area landing pages, sitemap, JSON-LD, OG images, ISR revalidation
 - ⬜ 5.10 Enquiry/contact (login to reveal contact) + owner lead inbox 🅰
 - ⬜ 5.11 Schedule-a-visit requests + share links
 - ⬜ 5.12 Search performance: indexes, Valkey caching, load check at 500 listings
-
 
 ## Phase 6: Mess Marketplace & Mess Management (0/12)
 
@@ -141,7 +135,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 6.11 Mess manager dashboard (meal counts, revenue, feedback, wastage log)
 - ⬜ 6.12 Link mess to hostel/PG: residents see and subscribe from My Stay
 
-
 ## Phase 7: Booking & Stay Lifecycle (0/9)
 
 - ⬜ 7.1 Booking request flow (unit/bed, move-in date, token amount) 🅱
@@ -153,7 +146,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 7.7 Transfer, notice period, vacate/check-out, deposit refund
 - ⬜ 7.8 Cancellation and refund policy rules per property
 - ⬜ 7.9 Booking history and rebook
-
 
 ## Phase 8: Rent & Payments (UPI-direct) (0/9)
 
@@ -167,7 +159,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 8.8 Bank-statement CSV import + auto-match by UTR/amount
 - ⬜ 8.9 Financial reports and CSV export
 
-
 ## Phase 9: Communication & Complaints (0/10)
 
 - ⬜ 9.1 Notice board: CRUD, audience targeting, attachments, pin/expiry 🅱
@@ -180,7 +171,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 9.8 Resolution feedback, reopen flow, complaint analytics
 - ⬜ 9.9 Outpass / leave with manager and guardian approval
 - ⬜ 9.10 Visitor pre-registration (resident side)
-
 
 ## Phase 10: Security, Entry/Exit & CCTV (optional module) (0/11)
 
@@ -196,7 +186,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 10.10 Lost and found 🅿
 - ⬜ 10.11 Security dashboard and patrol check-ins 🅿
 
-
 ## Phase 11: Reviews, Ratings & Trust (0/7)
 
 - ⬜ 11.1 Verified reviews (must reference real booking/subscription) with rating dimensions; mess dimensions 🅱
@@ -207,7 +196,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 11.6 Spam/abuse controls: rate limits, contact masking, enquiry throttles 🅱
 - ⬜ 11.7 Fake-review and stale-listing detection rules 🅿
 
-
 ## Phase 12: Dashboards, Analytics & Reports (0/6)
 
 - ⬜ 12.1 Owner dashboard: occupancy, rent collected/due, leads, complaints
@@ -216,7 +204,6 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 12.4 Platform admin dashboard: listings, verification, reports, growth
 - ⬜ 12.5 Guardian portal
 - ⬜ 12.6 Report exports (CSV, PDF) for key reports
-
 
 ## Phase 13: AI Layer (0/12)
 
@@ -233,14 +220,12 @@ Reason: owners and seekers must meet first (listings + search), then money and s
 - ⬜ 13.11 Natural-language analytics for owners via whitelisted tools 🅿
 - ⬜ 13.12 AI audit log, eval suite (Promptfoo), guardrails (prompt-injection tests), feedback loop
 
-
 ## Phase 14: PWA, Push & Performance (0/4)
 
 - ⬜ 14.1 PWA manifest, service worker, install prompt, offline shell
 - ⬜ 14.2 Web push notifications (VAPID) incl. emergency alerts
 - ⬜ 14.3 Offline-safe flows (guard queue, cached menu/notices/QR)
 - ⬜ 14.4 Performance pass (Lighthouse budgets, image optimization, bundle analysis)
-
 
 ## Phase 15: Testing, Hardening & Launch (0/11)
 

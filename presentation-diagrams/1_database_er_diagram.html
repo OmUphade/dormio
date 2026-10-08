@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dormio — Entity-Relationship (ER) Diagram</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #FFFFFF;
+      color: #0F172A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 30px;
+      min-width: 2200px;
+    }
+    .diagram-header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #E2E8F0;
+    }
+    .diagram-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+    }
+    .diagram-header p {
+      font-size: 16px;
+      color: #475569;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .badges-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .badge {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-postgres { background: #E0F2FE; color: #0369A1; }
+    .badge-crowsfoot { background: #FEF3C7; color: #B45309; }
+    .badge-tenant { background: #FFEDD5; color: #C2410C; }
+
+    #mermaid-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+    }
+    /* Increase font sizes and crisp lines in Mermaid ER diagrams */
+    .er.entityBox {
+      stroke: #1E293B !important;
+      stroke-width: 2px !important;
+    }
+    .er.relationshipLine {
+      stroke: #EA580C !important;
+      stroke-width: 2.5px !important;
+    }
+    .er.entityLabel {
+      font-family: 'Outfit', sans-serif !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+    }
+    .er.attributeBoxOdd, .er.attributeBoxEven {
+      font-size: 14px !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="diagram-header">
+    <h1>DORMIO — Entity-Relationship (ER) Diagram</h1>
+    <p>Relational Schema with Crow's Foot Cardinality, Tenant Isolation (property_id), and PostGIS Geolocation</p>
+    <div class="badges-row">
+      <span class="badge badge-postgres">PostgreSQL 16 + PostGIS + Drizzle ORM</span>
+      <span class="badge badge-crowsfoot">Standard Crow's Foot Notation</span>
+      <span class="badge badge-tenant">Strict Tenant Boundary</span>
+    </div>
+  </div>
+
+  <div id="mermaid-container" class="mermaid">
+erDiagram
+    USERS ||--o{ ORGANIZATIONS : "owns"
+    ORGANIZATIONS ||--|{ PROPERTIES : "operates"
+    PROPERTIES ||--|{ UNITS : "contains"
+    PROPERTIES ||--o{ LISTINGS : "publishes"
+    USERS ||--o{ BOOKINGS : "submits"
+    UNITS ||--o{ BOOKINGS : "assigned_unit"
+    USERS ||--o{ STAYS : "occupies"
+    UNITS ||--o{ STAYS : "allocated_to"
+    STAYS ||--|{ INVOICES : "billed_by"
+    INVOICES ||--o{ PAYMENTS : "settled_via"
+    USERS ||--o{ COMPLAINTS : "files"
+    STAYS ||--o{ COMPLAINTS : "references"
+    STAYS ||--o{ GATE_EVENTS : "logs"
+    PROPERTIES ||--o{ MEAL_SCHEDULES : "provides"
+    STAYS ||--o{ REVIEWS : "evaluates"
+
+    USERS {
+        uuid id PK
+        string email UK
+        string phone UK
+        string password_hash
+        string full_name
+        string role
+        timestamptz created_at
+    }
+
+    ORGANIZATIONS {
+        uuid id PK
+        uuid owner_user_id FK
+        string name
+        string type
+        string kyc_status
+        timestamptz created_at
+    }
+
+    PROPERTIES {
+        uuid id PK
+        uuid organization_id FK
+        string kind "HOSTEL | PG | MESS"
+        string name
+        jsonb address
+        geometry location "PostGIS Point"
+        jsonb property_features
+        string upi_vpa
+    }
+
+    LISTINGS {
+        uuid id PK
+        uuid property_id FK
+        string slug UK
+        string title
+        text description
+        boolean is_public
+        string status
+        numeric rating_avg
+    }
+
+    UNITS {
+        uuid id PK
+        uuid property_id FK
+        string name "Room 304"
+        string unit_type "SINGLE|DBL|TRP"
+        int floor_number
+        int total_beds
+        bigint base_rent_paise
+    }
+
+    BOOKINGS {
+        uuid id PK
+        uuid property_id FK
+        uuid user_id FK
+        uuid unit_id FK
+        string idempotency_key UK
+        string status "CONFIRMED|PENDING"
+        date check_in_date
+    }
+
+    STAYS {
+        uuid id PK
+        uuid property_id FK
+        uuid user_id FK
+        uuid unit_id FK
+        string status "ACTIVE|VACATED"
+        date start_date
+        string gate_qr_seed
+    }
+
+    INVOICES {
+        uuid id PK
+        uuid property_id FK
+        uuid stay_id FK
+        uuid user_id FK
+        bigint amount_paise
+        date due_date
+        string status "UNPAID|PAID|OVERDUE"
+    }
+
+    PAYMENTS {
+        uuid id PK
+        uuid property_id FK
+        uuid invoice_id FK
+        uuid user_id FK
+        string utr "12-digit UK per prop"
+        bigint amount_paise
+        string status "PENDING|VERIFIED"
+        uuid verified_by FK
+    }
+
+    GATE_EVENTS {
+        uuid id PK
+        uuid property_id FK
+        uuid user_id FK
+        string direction "ENTRY|EXIT"
+        string scan_method "QR|MANUAL"
+        string status "ALLOWED|LATE|BLOCKED"
+        timestamptz timestamp
+    }
+
+    COMPLAINTS {
+        uuid id PK
+        uuid property_id FK
+        uuid stay_id FK
+        uuid user_id FK
+        string category "MAINT|FOOD|NOISE"
+        string title
+        string status "OPEN|IN_PROG|RESOLVED"
+        string priority
+    }
+
+    MEAL_SCHEDULES {
+        uuid id PK
+        uuid property_id FK
+        smallint day_of_week "1 to 7"
+        string meal_slot "BF|LUNCH|SNACK|DIN"
+        jsonb items
+        boolean is_pure_veg
+        time cutoff_time
+    }
+
+    REVIEWS {
+        uuid id PK
+        uuid property_id FK
+        uuid stay_id FK
+        uuid user_id FK
+        int rating "1 to 5"
+        text comment
+        boolean verified_stay
+    }
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        fontSize: '16px',
+        fontFamily: 'Plus Jakarta Sans',
+        primaryColor: '#FFFFFF',
+        primaryTextColor: '#0F172A',
+        primaryBorderColor: '#0F172A',
+        lineColor: '#EA580C',
+        secondaryColor: '#F8FAFC',
+        tertiaryColor: '#FFFFFF',
+        attributeBackgroundColorOdd: '#FFFFFF',
+        attributeBackgroundColorEven: '#F8FAFC'
+      },
+      er: {
+        useMaxWidth: false,
+        layoutDirection: 'TB',
+        entityPadding: 16
+      }
+    });
+  </script>
+</body>
+</html>
