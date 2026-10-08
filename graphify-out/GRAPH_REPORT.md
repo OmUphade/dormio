@@ -1,17 +1,17 @@
 # Graph Report - dormio  (2026-10-09)
 
 ## Corpus Check
-- 653 files · ~748,295 words
+- 653 files · ~748,762 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 73 file(s) not represented in the graph (top: .csv 53, (none) 18, .example 1)
 
 ## Summary
-- 6468 nodes · 9301 edges · 577 communities (372 shown, 205 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 662 edges (avg confidence: 0.86)
+- 6469 nodes · 9306 edges · 561 communities (357 shown, 204 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 666 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `80f8f427`
+- Built from commit: `3069efe0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -33,13 +33,13 @@
 - design_system.py
 - csv
 - intel.cjs
-- cip/core.py
+- config.cjs
 - slide_search_core.py
 - gsd-debugger.md
 - verify.cjs
 - gsd-tools.cjs
 - worktree-safety.cjs
-- argparse
+- icon/generate.py
 - profile-output.cjs
 - json
 - gsd-check-update-worker.js
@@ -76,13 +76,12 @@
 - state-command-router.cjs
 - plan-phase.md
 - verify-reapply-patches.cjs
-- cip/generate.py
+- platformWriteSync
 - extract-colors.cjs
 - validate-asset.cjs
 - radius
-- TailwindConfigGenerator
 - TestWebStackFreshness
-- design-tokens-starter.json
+- primitive
 - .test_node_check_parses_generated_config
 - ref_path
 - TestDomainDetection
@@ -90,14 +89,13 @@
 - active-workstream-store.cjs
 - phase-command-router.cjs
 - validate-tokens.cjs
-- card
+- button
 - learnings.cjs
 - fallow-runner.cjs
 - state-document.generated.cjs
 - gsd-read-injection-scanner.js
 - inject-brand-context.cjs
 - embed-tokens.cjs
-- main
 - adr-parser.cjs
 - generate-tokens.cjs
 - gsd-statusline.js
@@ -108,14 +106,15 @@
 - api/package.json
 - prompt-budget.cjs
 - package.json
-- ref_os
+- runtime-homes.cjs
 - Core Workflow
 - tasks
 - decisions.generated.cjs
 - schema-detect.generated.cjs
 - git-cmd.js
+- TailwindConfigGenerator
 - Design
-- search-slides.py
+- test_style_taxonomy.py
 - Canvas Design System
 - Prerequisites
 - phase.generated.cjs
@@ -124,7 +123,7 @@
 - dependencies
 - config/package.json
 - 5. Core Features
-- TestNativeDesktopStackFreshness
+- test_native_desktop_stack_freshness.py
 - gsd-project-researcher.md
 - (marketplace)/page.jsx
 - xl
@@ -164,7 +163,7 @@
 - Asset Approval Checklist
 - Logo AI Prompt Engineering
 - Design System Master — Dormio
-- System Architecture — Dormio
+- 2. Technology Stack (all free / open source)
 - PROMPTS — copy/paste into Antigravity
 - Color Palette Management
 - CIP Deliverable Guide
@@ -426,37 +425,20 @@
 - COMPONENTS.md
 - PAGES.md
 - app.js
-- button
-- 3. Technology Standards
+- ref_os
 - Dormio
 - check-latest-version.cjs
 - 5. Cross-Cutting Design
 - Task Breakdown & Verification Criteria
 - BM25
-- BM25
+- 11. Vibe-Coding Protocol (applies to every agent session)
 - plan-scan.generated.cjs
-- input
+- primary-hover
 - scripts
 - compilerOptions
 - logo/search.py
-- TestThresholdGate
-- TestTokenizer
+- unittest
 - .prettierrc.json
-- $type
-- radius
-- lg
-- sm
-- padding-y
-- TestFixtureValidation
-- 16
-- 1
-- 3
-- 8
-- destructive
-- destructive-foreground
-- muted
-- primary-foreground
-- secondary-foreground
 
 ## God Nodes (most connected - your core abstractions)
 1. `output()` - 161 edges
@@ -485,15 +467,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (577 total, 205 thin omitted)
+## Communities (561 total, 204 thin omitted)
 
 ### Community 0 - "error"
-Cohesion: 0.04
-Nodes (73): _dispatchNonFamily(), runCommand(), collectCustomFiles(), formatAuditReport(), cmdCheckCommit(), cmdCommit(), cmdCommitToSubrepo(), cmdCurrentTimestamp() (+65 more)
+Cohesion: 0.07
+Nodes (41): _dispatchNonFamily(), runCommand(), collectCustomFiles(), formatAuditReport(), cmdCheckCommit(), cmdCommit(), cmdCommitToSubrepo(), cmdCurrentTimestamp() (+33 more)
 
 ### Community 1 - "phase.cjs"
-Cohesion: 0.06
-Nodes (48): escapeRegex(), getArchivedPhaseDirs(), phaseMarkdownRegexSource(), phaseMarkdownRegexSourceExact(), readSubdirectories(), replaceInCurrentMilestone(), stripShippedMilestones(), ADR-3524 (+40 more)
+Cohesion: 0.10
+Nodes (27): getArchivedPhaseDirs(), readSubdirectories(), ADR-3524, cmdPhasePlanIndex(), cmdPhaseRemove(), decrementRoadmapPaddedPhaseNumber(), decrementRoadmapPhaseNumber(), decrementRoadmapPhaseToken() (+19 more)
 
 ### Community 2 - "ShadcnInstaller"
 Cohesion: 0.05
@@ -505,7 +487,7 @@ Nodes (31): BM25, _contains_phrase(), detect_domain(), _domain_keywords(), _exac
 
 ### Community 4 - "validate_data.py"
 Cohesion: 0.07
-Nodes (42): read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date(), _check_app_interface_contract(), _check_catalog_contract() (+34 more)
+Nodes (43): read_rows(), TestAccessibilityGuidance, TestChartsTypographyAndIcons, TestCurrentReactGuidance, TestSemanticColors, _catalog_date(), _check_app_interface_contract(), _check_catalog_contract() (+35 more)
 
 ### Community 5 - "shell-command-projection.cjs"
 Cohesion: 0.10
@@ -517,22 +499,22 @@ Nodes (20): allClusteredSkills(), ADR-0011, CLUSTERS, computeClosure(), PROFILES
 
 ### Community 7 - "init.cjs"
 Cohesion: 0.07
-Nodes (86): cmdListTodos(), cmdProgressRender(), cmdResolveModel(), cmdScaffold(), cmdStats(), cmdTodoMatchPhase(), determinePhaseStatus(), comparePhaseNum() (+78 more)
+Nodes (87): cmdTodoMatchPhase(), escapeRegex(), extractCurrentMilestone(), findPhaseInternal(), generateSlugInternal(), getMilestoneInfo(), getMilestonePhaseFilter(), isDirInMilestone() (+79 more)
 
 ### Community 8 - "workstream.cjs"
-Cohesion: 0.07
-Nodes (43): cmdTodoComplete(), ensureGsdTempDir(), getLatestCompletedMilestone(), createPlanningWorkspace(), getActiveWorkstream(), planningRoot(), setActiveWorkstream(), platformEnsureDir() (+35 more)
+Cohesion: 0.08
+Nodes (36): createPlanningWorkspace(), getActiveWorkstream(), setActiveWorkstream(), cmdWorkstreamComplete(), cmdWorkstreamGet(), cmdWorkstreamList(), cmdWorkstreamProgress(), cmdWorkstreamSet() (+28 more)
 
 ### Community 9 - "output"
-Cohesion: 0.06
-Nodes (71): output(), cmdFrontmatterMerge(), cmdFrontmatterSet(), FRONTMATTER_SCHEMAS, fs, { output, error }, path, { platformReadSync: safeReadFile, platformWriteSync } (+63 more)
+Cohesion: 0.09
+Nodes (51): output(), reconstructFrontmatter(), cmdPhasesClear(), cmdRequirementsMarkComplete(), planningPaths(), validateFieldName(), ACQUIRE_LOCK_RETRY_ERRNOS, acquireStateLock() (+43 more)
 
 ### Community 10 - "core.cjs"
-Cohesion: 0.06
-Nodes (30): {
+Cohesion: 0.04
+Nodes (49): cmdResolveModel(), checkAgentsInstalled(), {
   CONFIG_DEFAULTS: CANONICAL_CONFIG_DEFAULTS,
   normalizeLegacyKeys,
-}, _deepMergeConfig(), detectSubRepos(), { execGit, platformWriteSync, platformReadSync, platformEnsureDir }, extractCanonicalPlanId(), extractPhaseToken(), filterPlanFiles(), filterSummaryFiles() (+22 more)
+}, _deepMergeConfig(), detectSubRepos(), ensureGsdTempDir(), { execGit, platformWriteSync, platformReadSync, platformEnsureDir }, extractCanonicalPlanId() (+41 more)
 
 ### Community 11 - "gray"
 Cohesion: 0.05
@@ -547,32 +529,32 @@ Cohesion: 0.83
 Nodes (3): classifyContextUtilization(), STATES, routeValidateCommand()
 
 ### Community 14 - "design_system.py"
-Cohesion: 0.05
-Nodes (23): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+15 more)
+Cohesion: 0.04
+Nodes (19): ansi_ljust(), _detect_page_type(), format_ascii_box(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides() (+11 more)
 
 ### Community 15 - "csv"
-Cohesion: 0.05
-Nodes (11): detect_domain(), _load_csv(), search(), search_all(), _search_csv(), TestMetricMath, read_rows(), TestStyleTaxonomy (+3 more)
+Cohesion: 0.07
+Nodes (14): detect_domain(), get_cip_brief(), _load_csv(), search(), search_all(), _search_csv(), detect_domain(), _load_csv() (+6 more)
 
 ### Community 16 - "intel.cjs"
 Cohesion: 0.16
 Nodes (22): crypto, disabledResponse(), ensureIntelDir(), fs, hashFile(), INTEL_FILES, intelDiff(), intelExtractExports() (+14 more)
 
-### Community 17 - "cip/core.py"
-Cohesion: 0.18
-Nodes (6): detect_domain(), get_cip_brief(), _load_csv(), search(), search_all(), _search_csv()
+### Community 17 - "config.cjs"
+Cohesion: 0.07
+Nodes (27): cmdConfigGet(), cmdConfigPath(), cmdConfigSet(), cmdConfigSetModelProfile(), cmdMigrateConfig(), CONFIG_KEY_SUGGESTIONS, fs, getCmdConfigSetModelProfileResultMessage() (+19 more)
 
 ### Community 18 - "slide_search_core.py"
-Cohesion: 0.14
-Nodes (8): calculate_pattern_break(), get_background_config(), get_color_for_emotion(), get_layout_for_goal(), _load_csv(), _load_decision_csv(), _search_csv(), should_use_full_bleed()
+Cohesion: 0.08
+Nodes (17): format_context(), format_result(), main(), BM25, calculate_pattern_break(), detect_domain(), get_background_config(), get_color_for_emotion() (+9 more)
 
 ### Community 19 - "gsd-debugger.md"
 Cohesion: 0.03
 Nodes (57): After Checkpoint, Balance Research and Reasoning, Binary Search / Divide and Conquer, Checkpoint Format, CHECKPOINT REACHED, Checkpoint Types, Combining Techniques, Comment Out Everything (+49 more)
 
 ### Community 20 - "verify.cjs"
-Cohesion: 0.06
-Nodes (43): CANONICAL_EXACT, CANONICAL_PATTERNS, isCanonicalPlanningFile(), checkAgentsInstalled(), getAgentsDir(), buildMessage(), parseMustHavesBlock(), buildPreview() (+35 more)
+Cohesion: 0.08
+Nodes (32): CANONICAL_EXACT, CANONICAL_PATTERNS, isCanonicalPlanningFile(), parseMustHavesBlock(), buildNotStartedPhaseVariants(), buildRoadmapPhaseVariants(), canonicalPlanStem(), ADR-3524 (+24 more)
 
 ### Community 21 - "gsd-tools.cjs"
 Cohesion: 0.06
@@ -582,17 +564,17 @@ Nodes (31): commands, config, core, docs, frontmatter, fs, gapChecker, { getActi
 Cohesion: 0.11
 Nodes (22): cmdWorktreeCleanupWave(), cmdWorktreeReapOrphans(), defaultFindSummaryFiles(), walk(), { execGit: execGitSeam }, executeWorktreeWaveCleanupPlan(), fs, gitResultOk() (+14 more)
 
-### Community 23 - "argparse"
+### Community 23 - "icon/generate.py"
 Cohesion: 0.07
-Nodes (18): generate_html(), get_deliverable_info(), get_image_base64(), main(), apply_color(), apply_viewbox_size(), extract_svgs(), generate_batch() (+10 more)
+Nodes (17): generate_html(), get_deliverable_info(), get_image_base64(), main(), apply_color(), apply_viewbox_size(), extract_svgs(), generate_batch() (+9 more)
 
 ### Community 24 - "profile-output.cjs"
 Cohesion: 0.10
 Nodes (31): buildClaudeMdFallbacks(), buildClaudeMdProfilePlaceholder(), buildClaudeMdWorkflowEnforcement(), buildSection(), CLAUDE_INSTRUCTIONS, cmdGenerateClaudeMd(), buildSectionContent(), cmdProfileQuestionnaire() (+23 more)
 
 ### Community 25 - "json"
-Cohesion: 0.08
-Nodes (9): test_sync_parses_bundled_starter_template(), format_brief(), format_results(), main(), main(), _run(), test_flags_hardcoded_hex_sharing_line_with_token(), test_token_only_line_reports_no_violation() (+1 more)
+Cohesion: 0.07
+Nodes (17): test_sync_parses_bundled_starter_template(), build_cip_prompt(), check_logo_required(), generate_cip_set(), generate_with_nano_banana(), load_env(), load_logo_image(), main() (+9 more)
 
 ### Community 26 - "gsd-check-update-worker.js"
 Cohesion: 0.13
@@ -611,12 +593,12 @@ Cohesion: 0.13
 Nodes (10): _e(), generate_chart_slide(), generate_cta_slide(), generate_deck(), generate_metrics_slide(), generate_problem_slide(), generate_solution_slide(), generate_testimonial_slide() (+2 more)
 
 ### Community 30 - "spacing"
-Cohesion: 0.09
-Nodes (22): $type, $value, $type, $value, $type, $value, $type, $value (+14 more)
+Cohesion: 0.06
+Nodes (34): $type, $value, $type, $value, $type, $value, $type, $value (+26 more)
 
 ### Community 32 - "platformReadSync"
-Cohesion: 0.07
-Nodes (48): auditOpenArtifacts(), { extractFrontmatter }, fs, path, { planningDir }, { platformReadSync }, { requireSafePath, sanitizeForDisplay }, scanContextQuestions() (+40 more)
+Cohesion: 0.06
+Nodes (61): auditOpenArtifacts(), { extractFrontmatter }, fs, path, { planningDir }, { platformReadSync }, { requireSafePath, sanitizeForDisplay }, scanContextQuestions() (+53 more)
 
 ### Community 33 - "profile-pipeline.cjs"
 Cohesion: 0.21
@@ -651,12 +633,12 @@ Cohesion: 0.15
 Nodes (16): routeCjsCommandFamily(), getExecuteForCjs(), PHASES_SUBCOMMANDS, { INIT_SUBCOMMANDS }, { output }, { routeCjsCommandFamily }, routeInitCommand(), sdkHandler() (+8 more)
 
 ### Community 41 - "color"
-Cohesion: 0.11
-Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
+Cohesion: 0.06
+Nodes (31): $type, $value, background, destructive, destructive-foreground, foreground, muted, muted-foreground (+23 more)
 
 ### Community 42 - "DesignSystemGenerator"
-Cohesion: 0.07
-Nodes (7): DesignSystemGenerator, _resolve_dial(), TestReasoningMatch, read_rows(), TestGeneratedCatalogContract, TestLandingAndStackContract, TestReasoningContract
+Cohesion: 0.06
+Nodes (13): DesignSystemGenerator, apply_decision_rules(), _object_without_duplicates(), parse_decision_rules(), _validate_action(), TestReasoningMatch, read_rows(), split_values() (+5 more)
 
 ### Community 43 - "drift.cjs"
 Cohesion: 0.17
@@ -722,9 +704,9 @@ Nodes (36): 0. Git Branch Invariant, 10. Spawn gsd-plan-checker Agent, 11. Handl
 Cohesion: 0.22
 Nodes (12): computeUserAddedLines(), crypto, fs, isSignificantLine(), main(), parseArgs(), path, readPristineHashes() (+4 more)
 
-### Community 62 - "cip/generate.py"
-Cohesion: 0.19
-Nodes (7): build_cip_prompt(), check_logo_required(), generate_cip_set(), generate_with_nano_banana(), load_env(), load_logo_image(), main()
+### Community 62 - "platformWriteSync"
+Cohesion: 0.12
+Nodes (31): cmdScaffold(), cmdTodoComplete(), buildNewProjectConfig(), cmdConfigEnsureSection(), cmdConfigNewProject(), ensureConfigFile(), buildMessage(), buildPreview() (+23 more)
 
 ### Community 63 - "extract-colors.cjs"
 Cohesion: 0.22
@@ -735,16 +717,16 @@ Cohesion: 0.25
 Nodes (13): checkManifest(), formatBytes(), formatOutput(), fs, main(), parseFilename(), path, RULES (+5 more)
 
 ### Community 65 - "radius"
-Cohesion: 0.19
-Nodes (14): $type, $value, $type, $value, $type, $value, primitive, radius (+6 more)
+Cohesion: 0.12
+Nodes (23): $type, $value, lg, sm, $type, $value, $type, $value (+15 more)
 
-### Community 68 - "design-tokens-starter.json"
+### Community 68 - "primitive"
 Cohesion: 0.15
-Nodes (12): component, $type, $value, dark, semantic, $schema, $type, $value (+4 more)
+Nodes (12): $type, $value, dark, semantic, primitive, $schema, $type, $value (+4 more)
 
 ### Community 70 - "ref_path"
 Cohesion: 0.05
-Nodes (49): cmdGapAnalysis(), detectCoverage(), { escapeRegex, output, error }, formatGapTable(), fs, naturalKey(), { parseDecisions }, parseRequirements() (+41 more)
+Nodes (45): cmdGapAnalysis(), detectCoverage(), { escapeRegex, output, error }, formatGapTable(), fs, naturalKey(), { parseDecisions }, parseRequirements() (+37 more)
 
 ### Community 73 - "active-workstream-store.cjs"
 Cohesion: 0.21
@@ -758,9 +740,9 @@ Nodes (11): PHASE_SUBCOMMANDS, createHub(), dispatch(), _dispatchCjs(), _dispatc
 Cohesion: 0.24
 Nodes (11): extensions, formatReport(), fs, getFiles(), main(), parseArgs(), path, patterns (+3 more)
 
-### Community 76 - "card"
-Cohesion: 0.20
-Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
+### Community 76 - "button"
+Cohesion: 0.06
+Nodes (45): $type, $value, $type, $value, bg, fg, font-size, hover-bg (+37 more)
 
 ### Community 77 - "learnings.cjs"
 Cohesion: 0.16
@@ -826,8 +808,8 @@ Nodes (7): applyBudget(), assemblePrompt(), DEFAULT_NOTE_TEMPLATE, estimateToken
 Cohesion: 0.06
 Nodes (31): devDependencies, @commitlint/cli, @commitlint/config-conventional, eslint, husky, lint-staged, prettier, turbo (+23 more)
 
-### Community 95 - "ref_os"
-Cohesion: 0.36
+### Community 95 - "runtime-homes.cjs"
+Cohesion: 0.39
 Nodes (8): buildAgentSkillsBlock(), expandTilde(), getGlobalConfigDir(), getGlobalSkillDir(), getGlobalSkillDisplayPath(), getGlobalSkillsBase(), os, path
 
 ### Community 97 - "Core Workflow"
@@ -853,10 +835,6 @@ Nodes (5): ARGUMENT_TAKING_FLAGS, BOOLEAN_FLAGS, isGitSubcommand(), path, tokeni
 ### Community 103 - "Design"
 Cohesion: 0.06
 Nodes (35): Banner Design (Built-in), Banner: Design Rules, Banner: Quick Size Reference, Banner: Top Art Styles, Banner: Workflow, CIP Design (Built-in), CIP: Generate Brief, CIP: Generate Mockups (+27 more)
-
-### Community 104 - "search-slides.py"
-Cohesion: 0.18
-Nodes (8): format_context(), format_result(), main(), detect_domain(), get_typography_for_slide(), search(), search_all(), search_with_context()
 
 ### Community 105 - "Canvas Design System"
 Cohesion: 0.06
@@ -885,10 +863,6 @@ Nodes (11): exports, ./eslint, ./jsconfig, ./tailwind, main, name, private, scri
 ### Community 112 - "5. Core Features"
 Cohesion: 0.18
 Nodes (11): 5.10 AI features ("beyond a chatbot"), 5.1 Discovery (marketplace), 5.2 Owner / operator onboarding and listing, 5.3 Booking and stay lifecycle, 5.4 Rent and payments (UPI-direct), 5.5 Mess (marketplace + operations), 5.6 Communication and complaints, 5.7 Security, entry/exit, CCTV (all per property) (+3 more)
-
-### Community 113 - "TestNativeDesktopStackFreshness"
-Cohesion: 0.13
-Nodes (3): TestBm25CoreBehavior, _rows(), TestNativeDesktopStackFreshness
 
 ### Community 114 - "gsd-project-researcher.md"
 Cohesion: 0.06
@@ -967,8 +941,8 @@ Cohesion: 0.07
 Nodes (28): Accordion, Alert, ARIA Labels, Checkbox and Radio, Color Contrast, Command Palette Navigation, Component-Specific Patterns, Dialog/Modal Navigation (+20 more)
 
 ### Community 149 - "Development Rules — Dormio"
-Cohesion: 0.11
-Nodes (18): 10. Documentation Rules, 11.1 Autonomy ladder, 11.2 Self-verification (no human QA), 11.3 Honesty and scope, 11.4 Session start / end, 11.5 Owner touchpoints (the only times the owner is needed), 11. Vibe-Coding Protocol (applies to every agent session), 12. UI Rules — STRICT: every design decision comes from UI UX Pro Max (+10 more)
+Cohesion: 0.10
+Nodes (21): 10. Documentation Rules, 12. UI Rules — STRICT: every design decision comes from UI UX Pro Max, 1. Agent Quick Rules (put in AGENTS.md), 2. General Principles, 3.1 Language and tooling, 3.2 Naming, 3.3 Frontend rules, 3.5 Database rules (+13 more)
 
 ### Community 150 - "GSD Intel Updater"
 Cohesion: 0.07
@@ -994,9 +968,9 @@ Nodes (25): Common Pitfalls, Core Prompt Structure, Detailed Brief, Eco/Sustaina
 Cohesion: 0.08
 Nodes (25): 1.1 Styles Evaluated & Selection, 1.2 Color Profile Selection, 1.3 Distinct Hue per Domain Module (from Skill Databases), 1.4 Typography Selection, 1. Selection Rationale, 2.1 Color Tokens (CSS Variables), 2.2 Spacing Scale (4-px base rhythm), 2.3 Border Radius & Shape Language: The Arch (+17 more)
 
-### Community 156 - "System Architecture — Dormio"
-Cohesion: 0.13
-Nodes (14): 1. High-Level Architecture, 2. Technology Stack (all free / open source), 3. Monorepo Folder Structure, 4. Core Domain Model (high level), 6. Environments, 7. Scalability Path (when needed), 8. AI-Assisted Development Toolchain (verified install steps), AI layer (`apps/api/src/modules/ai` + optional `services/ai-worker`) (+6 more)
+### Community 156 - "2. Technology Stack (all free / open source)"
+Cohesion: 0.33
+Nodes (6): 2. Technology Stack (all free / open source), AI layer (`apps/api/src/modules/ai` + optional `services/ai-worker`), Backend (`apps/api`), CCTV / Security, DevOps, Frontend (`apps/web`)
 
 ### Community 157 - "PROMPTS — copy/paste into Antigravity"
 Cohesion: 0.17
@@ -1163,8 +1137,8 @@ Cohesion: 0.12
 Nodes (15): 22 Art Direction Styles, Banner Sizes & Art Direction Styles Reference, Complete Banner Sizes, CTA Rules, Design Principles, Pinterest Research Queries, Print, Print Specs (+7 more)
 
 ### Community 197 - "Project Memory — Dormio"
-Cohesion: 0.13
-Nodes (15): 10. AI Tooling Notes, 11. Session Log (newest first), 12. End-of-Session Checklist, 13. Archive, 1. Current Status, 2026-10-08 — Re-scope and starter kit, 2. Decisions (settled; do not relitigate without an ADR), 3. Completed Work (log) (+7 more)
+Cohesion: 0.15
+Nodes (13): 10. AI Tooling Notes, 12. End-of-Session Checklist, 13. Archive, 1. Current Status, 2. Decisions (settled; do not relitigate without an ADR), 3. Completed Work (log), 4. In Progress, 5. Changes Log (+5 more)
 
 ### Community 198 - "Common Bug Patterns"
 Cohesion: 0.13
@@ -1615,8 +1589,8 @@ Cohesion: 0.25
 Nodes (7): 0. Initialize, 1. Detect Input State, 2. Gather Context Paths, 3. Spawn gsd-ui-auditor, 4. Handle Return, 5. Commit (if configured), Automated UI Verification (when Playwright-MCP is available)
 
 ### Community 310 - "server.js"
-Cohesion: 0.23
-Nodes (7): env, envSchema, parsed, logger, app, server, pino
+Cohesion: 0.18
+Nodes (9): env, envSchema, parsed, logger, errorHandler(), app, server, RFC-7807 (+1 more)
 
 ### Community 311 - "002-codex-legacy-hooks-json.cjs"
 Cohesion: 0.43
@@ -1879,16 +1853,12 @@ Cohesion: 0.67
 Nodes (3): 8.5.1 Outline Phase (outline-only mode, ~2 min), 8.5.2 Per-Plan Tasks (single-plan mode, ~3-5 min each), 8.5. Chunked Planning Mode
 
 ### Community 431 - "app.js"
-Cohesion: 0.12
-Nodes (17): createApp(), setupOpenApi(), auth(), errorHandler(), rateLimit(), requestId(), scope(), RFC-7807 (+9 more)
+Cohesion: 0.13
+Nodes (18): createApp(), setupOpenApi(), auth(), rateLimit(), requestId(), scope(), 5.1 Authentication and Authorization, 11. Session Log (newest first) (+10 more)
 
-### Community 457 - "button"
-Cohesion: 0.20
-Nodes (10): fg, font-size, hover-bg, button, $type, $value, $type, $value (+2 more)
-
-### Community 542 - "3. Technology Standards"
-Cohesion: 0.22
-Nodes (9): 3.1 Language and tooling, 3.2 Naming, 3.3 Frontend rules, 3.5 Database rules, 3.6 API rules, 3.7 AI feature rules, 3.8 Security rules, 3.9 Privacy and compliance (DPDP Act 2023) (+1 more)
+### Community 542 - "ref_os"
+Cohesion: 0.29
+Nodes (4): findProjectRoot(), fs, os, path
 
 ### Community 543 - "Dormio"
 Cohesion: 0.20
@@ -1899,20 +1869,24 @@ Cohesion: 0.38
 Nodes (6): CHECK_REASON, checkLatestVersion(), { execNpm }, main(), execNpm(), _spawnResult()
 
 ### Community 545 - "5. Cross-Cutting Design"
-Cohesion: 0.20
-Nodes (10): 5.10 Marketplace Search and SEO, 5.2 API Conventions, 5.3 Payments Flow (UPI-direct), 5.4 Notifications, 5.5 Security Module (Gate), 5.6 CCTV Integration (optional, per hostel), 5.7 AI Architecture, 5.8 Observability and Operations (+2 more)
+Cohesion: 0.11
+Nodes (18): 1. High-Level Architecture, 3. Monorepo Folder Structure, 4. Core Domain Model (high level), 5.10 Marketplace Search and SEO, 5.2 API Conventions, 5.3 Payments Flow (UPI-direct), 5.4 Notifications, 5.5 Security Module (Gate) (+10 more)
 
 ### Community 546 - "Task Breakdown & Verification Criteria"
 Cohesion: 0.20
 Nodes (9): Phase 1 Plan: Project Setup & Agent Tooling, Task 1.10: CI & Agent Tooling Verification, Task 1.3: apps/web Route Groups & Architecture Alignment, Task 1.5: packages/shared & packages/config, Task 1.6: Code Quality, Linting & Git Hooks, Task 1.7: docker-compose Verification, Task 1.8: Drizzle ORM + Schema (PostGIS & pgvector) + First Migration, Task 1.9: Environment Validation & Finalize .env.example (+1 more)
 
+### Community 548 - "11. Vibe-Coding Protocol (applies to every agent session)"
+Cohesion: 0.33
+Nodes (6): 11.1 Autonomy ladder, 11.2 Self-verification (no human QA), 11.3 Honesty and scope, 11.4 Session start / end, 11.5 Owner touchpoints (the only times the owner is needed), 11. Vibe-Coding Protocol (applies to every agent session)
+
 ### Community 549 - "plan-scan.generated.cjs"
 Cohesion: 0.39
 Nodes (7): { existsSync, readdirSync }, isNestedPlanFile(), isNestedSummaryFile(), isRootPlanFile(), isRootSummaryFile(), { join }, scanPhasePlans()
 
-### Community 550 - "input"
-Cohesion: 0.29
-Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
+### Community 550 - "primary-hover"
+Cohesion: 0.67
+Nodes (3): primary-hover, $type, $value
 
 ### Community 551 - "scripts"
 Cohesion: 0.25
@@ -1922,70 +1896,18 @@ Nodes (8): scripts, db:generate, db:migrate, db:verify, dev, lint, start, test
 Cohesion: 0.25
 Nodes (7): compilerOptions, allowJs, baseUrl, checkJs, module, moduleResolution, target
 
+### Community 554 - "unittest"
+Cohesion: 0.11
+Nodes (3): TestFixtureValidation, TestMetricMath, TestThresholdGate
+
 ### Community 556 - ".prettierrc.json"
 Cohesion: 0.33
 Nodes (5): printWidth, semi, singleQuote, tabWidth, trailingComma
 
-### Community 557 - "$type"
-Cohesion: 0.60
-Nodes (5): $type, $value, border, border, border
-
-### Community 558 - "radius"
-Cohesion: 0.60
-Nodes (5): radius, radius, radius, $type, $value
-
-### Community 559 - "lg"
-Cohesion: 0.60
-Nodes (5): lg, $type, $value, lg, lg
-
-### Community 560 - "sm"
-Cohesion: 0.60
-Nodes (5): sm, sm, sm, $type, $value
-
-### Community 561 - "padding-y"
-Cohesion: 0.67
-Nodes (4): padding-y, padding-y, $type, $value
-
-### Community 563 - "16"
-Cohesion: 0.67
-Nodes (3): $type, $value, 16
-
-### Community 564 - "1"
-Cohesion: 0.67
-Nodes (3): $type, $value, 1
-
-### Community 565 - "3"
-Cohesion: 0.67
-Nodes (3): $type, $value, 3
-
-### Community 566 - "8"
-Cohesion: 0.67
-Nodes (3): $type, $value, 8
-
-### Community 567 - "destructive"
-Cohesion: 0.67
-Nodes (3): destructive, $type, $value
-
-### Community 568 - "destructive-foreground"
-Cohesion: 0.67
-Nodes (3): destructive-foreground, $type, $value
-
-### Community 569 - "muted"
-Cohesion: 0.67
-Nodes (3): muted, $type, $value
-
-### Community 570 - "primary-foreground"
-Cohesion: 0.67
-Nodes (3): primary-foreground, $type, $value
-
-### Community 571 - "secondary-foreground"
-Cohesion: 0.67
-Nodes (3): secondary-foreground, $type, $value
-
 ## Knowledge Gaps
 - **3338 isolated node(s):** `{ execNpm }`, `CHECK_REASON`, `fs`, `path`, `core` (+3333 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 4179 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **205 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **204 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -1997,10 +1919,10 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `{ execNpm }`, `CHECK_REASON`, `fs` to the rest of the system?**
   _3338 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `error` be split into smaller, more focused modules?**
-  _Cohesion score 0.0372829417773238 - nodes in this community are weakly interconnected._
-- **Why does `5. Cross-Cutting Design` connect `5. Cross-Cutting Design` to `System Architecture — Dormio`, `app.js`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+  _Cohesion score 0.07400555041628122 - nodes in this community are weakly interconnected._
+- **Why does `scope()` connect `app.js` to `gsd-doc-writer.md`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `runCommand()` (e.g. with `parseNamedArgs()` and `error()`) actually correct?**
   _`runCommand()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Should `phase.cjs` be split into smaller, more focused modules?**
-  _Cohesion score 0.06289308176100629 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0989247311827957 - nodes in this community are weakly interconnected._

@@ -2,7 +2,7 @@
 
 > The living brain of the project. Agents read this **first** every session and update it **last**. Keep it short and factual; archive old detail.
 
-**Last updated:** 2026-10-08 | **Updated by:** Planning session
+**Last updated:** 2026-10-09 | **Updated by:** Session closeout (/end-session)
 
 ---
 
@@ -68,9 +68,9 @@
 
 ## 4. In Progress
 
-| Task | Started    | State | Next step                                                        |
-| ---- | ---------- | ----- | ---------------------------------------------------------------- |
-| 1.4  | 2026-10-09 | Ready | Scaffold `apps/api` (Node.js + Express 5, JavaScript ES modules) |
+| Task | Started | State | Next step                                              |
+| ---- | ------- | ----- | ------------------------------------------------------ |
+| None | —       | —     | Pick next task from `docs/task.md` (e.g. 2.3 or P-04d) |
 
 ## 5. Changes Log
 
