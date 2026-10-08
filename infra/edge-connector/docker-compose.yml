@@ -1,0 +1,15 @@
+# ON-SITE CCTV CONNECTOR (runs on a PC inside the hostel network, only for hostels that have cameras)
+# 1. Edit go2rtc.yaml with your cameras' RTSP URLs.
+# 2. Create a Cloudflare Tunnel (free) and put its token in .env as CF_TUNNEL_TOKEN.
+# 3. Paste the pairing token shown in Dormio (Manage → CCTV) into Dormio. No ports are opened on your router.
+services:
+  go2rtc:
+    image: alexxit/go2rtc:latest
+    restart: unless-stopped
+    volumes: ["./go2rtc.yaml:/config/go2rtc.yaml"]
+    expose: ["1984"]
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CF_TUNNEL_TOKEN}
+    depends_on: [go2rtc]

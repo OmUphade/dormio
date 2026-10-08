@@ -1,0 +1,18 @@
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.turbo/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+pgdata/
+playwright-report/
+test-results/
+# Graphify: keep only shareable products (add with `git add -f` if you want to share)
+graphify-out/*
+!graphify-out/graph.json
+!graphify-out/GRAPH_REPORT.md

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en-US
+reviews:
+  profile: chill
+  high_level_summary: true
+  request_changes_workflow: false
+  auto_review:
+    enabled: true
+    drafts: false
+  path_instructions:
+    - path: "**"
+      instructions: "The project is JavaScript-only (ES modules + JSX). Flag any .ts/.tsx file, tsconfig, or TypeScript dependency. Exported functions need JSDoc; inputs validated with Zod."
+    - path: "apps/api/**"
+      instructions: |
+        Check (Express + Drizzle): fixed middleware order (requestId, rateLimit, auth, scope, policies, feature, validate); every property/organization-scoped query is scoped (property_id / organization_id); public endpoints return only the listing_public DTO (no PII); Zod validation at boundaries; money in integer paise; UPI payments never auto-marked paid without staff verification or statement match; feature flags enforced; no raw SQL outside documented repositories; tests include isolation and public-leak cases.
+    - path: "apps/web/**"
+      instructions: |
+        Check: every visible decision traces to UI UX Pro Max output (page spec with real recorded search.py commands in design-system/dormio/pages, `// ui-spec:` header, COMPONENTS.md entry, screenshots reviewed). Flag any design chosen by taste. Flag any gradients, black/near-black colors, dark theme, hard-coded colors/spacing/fonts, identical-card-grid pages, missing loading/empty/error states, missing alt text/labels, strings not externalized.
+    - path: "apps/api/src/modules/ai/**"
+      instructions: |
+        Check: LLM never writes SQL; write actions require explicit user confirmation; tools run with the caller's identity; prompt-injection defenses; AiAction audit records; no personal data to non-local providers.
+    - path: "**/migrations/**"
+      instructions: "Never edit merged migrations. Check indexes on foreign keys and property_id."
+chat:
+  auto_reply: true

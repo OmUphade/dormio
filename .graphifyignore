@@ -1,0 +1,14 @@
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.turbo/
+pgdata/
+playwright-report/
+test-results/
+*.png
+*.jpg
+*.jpeg
+*.webp
+design-system/dormio/screenshots/

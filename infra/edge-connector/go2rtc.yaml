@@ -1,0 +1,4 @@
+streams:
+  gate: rtsp://USER:PASSWORD@CAMERA_IP:554/stream1
+api:
+  listen: ":1984"

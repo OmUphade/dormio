@@ -1,0 +1,4 @@
+# Example only. Real camera streams are added per hostel via the edge connector.
+streams: {}
+api:
+  listen: ":1984"
