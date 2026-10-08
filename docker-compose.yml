@@ -10,10 +10,10 @@ services:
       POSTGRES_USER: dormio
       POSTGRES_PASSWORD: dormio_dev_password
       POSTGRES_DB: dormio
-    ports: ["5432:5432"]
-    volumes: ["pgdata:/var/lib/postgresql/data"]
+    ports: [ "5433:5432" ]
+    volumes: [ "pgdata:/var/lib/postgresql/data" ]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dormio -d dormio"]
+      test: [ "CMD-SHELL", "pg_isready -U dormio -d dormio" ]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -21,37 +21,37 @@ services:
   valkey:
     image: valkey/valkey:8
     container_name: dormio-valkey
-    ports: ["6379:6379"]
-    volumes: ["valkeydata:/data"]
+    ports: [ "6379:6379" ]
+    volumes: [ "valkeydata:/data" ]
 
   minio:
-    image: minio/minio:latest
+    image: cgr.dev/chainguard/minio:latest
     container_name: dormio-minio
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: dormio
       MINIO_ROOT_PASSWORD: dormio_dev_password
-    ports: ["9000:9000", "9001:9001"]
-    volumes: ["miniodata:/data"]
+    ports: [ "9000:9000", "9001:9001" ]
+    volumes: [ "miniodata:/data" ]
 
   mailpit:
     image: axllent/mailpit:latest
     container_name: dormio-mailpit
-    ports: ["1025:1025", "8025:8025"]
+    ports: [ "1025:1025", "8025:8025" ]
 
   ollama:
     image: ollama/ollama:latest
     container_name: dormio-ollama
-    profiles: ["ai"]
-    ports: ["11434:11434"]
-    volumes: ["ollamadata:/root/.ollama"]
+    profiles: [ "ai" ]
+    ports: [ "11434:11434" ]
+    volumes: [ "ollamadata:/root/.ollama" ]
 
   go2rtc:
     image: alexxit/go2rtc:latest
     container_name: dormio-go2rtc
-    profiles: ["cctv"]
-    ports: ["1984:1984", "8555:8555"]
-    volumes: ["./infra/go2rtc/go2rtc.yaml:/config/go2rtc.yaml"]
+    profiles: [ "cctv" ]
+    ports: [ "1984:1984", "8555:8555" ]
+    volumes: [ "./infra/go2rtc/go2rtc.yaml:/config/go2rtc.yaml" ]
 
 volumes:
   pgdata:
